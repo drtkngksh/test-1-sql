@@ -3,7 +3,7 @@ SELECT
   customers.wealth_segment AS wealth_segment, -- сегмент пользователя
   ROUND(SUM(CAST(REPLACE(
     REPLACE(
-      REPLACE(transactions.standard_cost, '[$]', ''), -- убрать пробелы и знак доллара
+      REPLACE(transactions.standard_cost, '[$]', ''), -- убрать пробелы, сменить символ дроби и знак доллара
       ',',
       '.'
     ),
