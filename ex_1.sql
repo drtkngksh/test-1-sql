@@ -24,7 +24,8 @@ SELECT
   customer_id
 FROM public.transaction_test_nick transactions
 GROUP BY customer_id
-HAVING MAX(EXTRACT(MONTH FROM to_date(transaction_date, 'DD-MM-YYYY'))) = 12 AND (MAX(EXTRACT(MONTH FROM to_date(transaction_date, 'DD-MM-YYYY'))) - MIN(EXTRACT(MONTH FROM to_date(transaction_date, 'DD-MM-YYYY'))) + 1) = COUNT(DISTINCT((EXTRACT(MONTH FROM to_date(transaction_date, 'DD-MM-YYYY')))))
+HAVING MAX(EXTRACT(MONTH FROM to_date(transaction_date, 'DD-MM-YYYY'))) = 12 -- была ли последняя транзакция в декабре
+AND (MAX(EXTRACT(MONTH FROM to_date(transaction_date, 'DD-MM-YYYY'))) - MIN(EXTRACT(MONTH FROM to_date(transaction_date, 'DD-MM-YYYY'))) + 1) = COUNT(DISTINCT((EXTRACT(MONTH FROM to_date(transaction_date, 'DD-MM-YYYY')))))
 ) -- отсеивать клиентов, которые не совершали покупки в каждом месяце года
 GROUP BY date, wealth_segment -- группировка по дате и сегменту
 ORDER BY date, wealth_segment -- сортировка по дате и сегменту
